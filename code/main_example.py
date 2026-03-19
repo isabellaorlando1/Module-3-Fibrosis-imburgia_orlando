@@ -29,6 +29,9 @@ depths = [
     750
 ]
 
+# Make sure the lists match
+if len(filenames) != len(depths):
+    raise ValueError("The number of filenames does not match the number of depths.")
 # Make the lists that will be used
 
 images = []
@@ -40,6 +43,8 @@ white_percents = []
 
 for filename in filenames:
     img = cv2.imread(filename, 0)
+    if img is None:
+        raise FileNotFoundError(f"Could not load image: {filename}")
     images.append(img)
 
 # For each image (until the end of the list of images), calculate the number of black and white pixels and make a list that contains this information for each filename.
@@ -47,11 +52,15 @@ for filename in filenames:
 for x in range(len(filenames)):
     _, binary = cv2.threshold(images[x], 127, 255, cv2.THRESH_BINARY)
 
-    white = np.sum(binary == 255)
-    black = np.sum(binary == 0)
+    white = np.count_nonzero(binary == 255)
+    total = binary.size
+    black = total - white
+    white_percent = (white / total) * 100
 
+# Calculate the percentage of pixels in each image that are white and make a list that contains these percentages for each filename
     white_counts.append(white)
     black_counts.append(black)
+    white_percents.append(white_percent)
 
 # Print the number of white and black pixels in each image.
 
@@ -60,13 +69,6 @@ for x in range(len(filenames)):
     print(colored(f"White pixels in image {x}: {white_counts[x]}", "white"))
     print(colored(f"Black pixels in image {x}: {black_counts[x]}", "black"))
     print()
-
-# Calculate the percentage of pixels in each image that are white and make a list that contains these percentages for each filename
-
-for x in range(len(filenames)):
-    white_percent = (
-        100 * (white_counts[x] / (black_counts[x] + white_counts[x])))
-    white_percents.append(white_percent)
 
 # Print the filename (on one line in red font), and below that line print the percent white pixels and depth into the lung where the image was obtained
 
