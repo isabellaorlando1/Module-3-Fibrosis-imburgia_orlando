@@ -21,12 +21,12 @@ filenames = [
 # Enter the depth of each image (in the same order that the images are listed above; you can find these in the .csv file provided to you which is tilted: "Filenames and Depths for Students")
 
 depths = [
-    15,
-    1000,
-    3000,
-    5300,
-    7000,
-    9900
+    100,
+    860,
+    9300,
+    9900,
+    8300,
+    750
 ]
 
 # Make the lists that will be used
