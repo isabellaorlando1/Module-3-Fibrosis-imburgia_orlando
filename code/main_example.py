@@ -10,12 +10,18 @@ import pandas as pd
 # Load the images you want to analyze
 
 filenames = [
-    r"C:\Users\ajq2af\OneDrive - University of Virginia\Documents\UVA\BME 2315\Module-3-Fibrosis\images\MASK_Sk658 Llobe ch010023.jpg",
-    r"C:\Users\ajq2af\OneDrive - University of Virginia\Documents\UVA\BME 2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010159.jpg",
-    r"C:\Users\ajq2af\OneDrive - University of Virginia\Documents\UVA\BME 2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010093.jpg",
-    r"C:\Users\ajq2af\OneDrive - University of Virginia\Documents\UVA\BME 2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010118.jpg",
-    r"C:\Users\ajq2af\OneDrive - University of Virginia\Documents\UVA\BME 2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010140.jpg",
-    r"C:\Users\ajq2af\OneDrive - University of Virginia\Documents\UVA\BME 2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010157.jpg",
+    #r"C:\Users\ajq2af\OneDrive - University of Virginia\Documents\UVA\BME 2315\Module-3-Fibrosis\images\MASK_Sk658 Llobe ch010023.jpg",
+    #r"C:\Users\ajq2af\OneDrive - University of Virginia\Documents\UVA\BME 2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010159.jpg",
+    #r"C:\Users\ajq2af\OneDrive - University of Virginia\Documents\UVA\BME 2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010093.jpg",
+    #r"C:\Users\ajq2af\OneDrive - University of Virginia\Documents\UVA\BME 2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010118.jpg",
+    #r"C:\Users\ajq2af\OneDrive - University of Virginia\Documents\UVA\BME 2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010140.jpg",
+    #r"C:\Users\ajq2af\OneDrive - University of Virginia\Documents\UVA\BME 2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010157.jpg",
+    r"C:\Users\isabe\OneDrive\Documents\BME2315\Module-3-Fibrosis\images\MASK_Sk658 Llobe ch010023.jpg",
+    r"C:\Users\isabe\OneDrive\Documents\BME2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010159.jpg",
+    r"C:\Users\isabe\OneDrive\Documents\BME2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010093.jpg",
+    r"C:\Users\isabe\OneDrive\Documents\BME2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010118.jpg",
+    r"C:\Users\isabe\OneDrive\Documents\BME2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010140.jpg",
+    r"C:\Users\isabe\OneDrive\Documents\BME2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010157.jpg",
 ]
 
 # Enter the depth of each image (in the same order that the images are listed above; you can find these in the .csv file provided to you which is tilted: "Filenames and Depths for Students")
