@@ -1,3 +1,4 @@
+#ChatGPT was used to improve accuracy and efficiency of this code.
 '''Module 3: count black and white pixels and compute the percentage of white pixels in a .jpg image and extrapolate points'''
 
 from termcolor import colored
