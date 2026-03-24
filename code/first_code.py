@@ -1,4 +1,3 @@
-#ChatGPT was used to improve accuracy and efficiency of this code.
 '''Module 3: count black and white pixels and compute the percentage of white pixels in a .jpg image and extrapolate points'''
 
 from termcolor import colored
@@ -9,39 +8,29 @@ from scipy.interpolate import interp1d
 import pandas as pd
 import time
 
-start = time.time()
 
 # Load the images you want to analyze
 
 filenames = [
-    #r"C:\Users\ajq2af\OneDrive - University of Virginia\Documents\UVA\BME 2315\Module-3-Fibrosis\images\MASK_Sk658 Llobe ch010023.jpg",
-    #r"C:\Users\ajq2af\OneDrive - University of Virginia\Documents\UVA\BME 2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010159.jpg",
-    #r"C:\Users\ajq2af\OneDrive - University of Virginia\Documents\UVA\BME 2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010093.jpg",
-    #r"C:\Users\ajq2af\OneDrive - University of Virginia\Documents\UVA\BME 2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010118.jpg",
-    #r"C:\Users\ajq2af\OneDrive - University of Virginia\Documents\UVA\BME 2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010140.jpg",
-    #r"C:\Users\ajq2af\OneDrive - University of Virginia\Documents\UVA\BME 2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010157.jpg",
-    r"C:\Users\isabe\OneDrive\Documents\BME2315\Module-3-Fibrosis\images\MASK_Sk658 Llobe ch010023.jpg",
-    r"C:\Users\isabe\OneDrive\Documents\BME2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010159.jpg",
-    r"C:\Users\isabe\OneDrive\Documents\BME2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010093.jpg",
-    r"C:\Users\isabe\OneDrive\Documents\BME2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010118.jpg",
-    r"C:\Users\isabe\OneDrive\Documents\BME2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010140.jpg",
-    r"C:\Users\isabe\OneDrive\Documents\BME2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010157.jpg",
+    r"../images/MASK_SK658 Llobe ch010039.jpg",
+    r"../images/MASK_SK658 Slobe ch010066.jpg",
+    r"../images/MASK_SK658 Slobe ch010147.jpg",
+    r"../images/MASK_SK658 Slobe ch010110.jpg",
+    r"../images/MASK_SK658 Slobe ch010130.jpg",
+    r"../images/MASK_SK658 Slobe ch010114.jpg",
 ]
 
 # Enter the depth of each image (in the same order that the images are listed above; you can find these in the .csv file provided to you which is tilted: "Filenames and Depths for Students")
 
 depths = [
-    100,
-    860,
-    9300,
-    9900,
-    8300,
-    750
+    15,
+    1000,
+    3000,
+    5300,
+    7000,
+    9900
 ]
 
-# Make sure the lists match
-if len(filenames) != len(depths):
-    raise ValueError("The number of filenames does not match the number of depths.")
 # Make the lists that will be used
 
 images = []
@@ -53,27 +42,21 @@ white_percents = []
 
 for filename in filenames:
     img = cv2.imread(filename, 0)
-    if img is None:
-        raise FileNotFoundError(f"Could not load image: {filename}")
     images.append(img)
 
 # For each image (until the end of the list of images), calculate the number of black and white pixels and make a list that contains this information for each filename.
-
+start = time.time()
 for x in range(len(filenames)):
     _, binary = cv2.threshold(images[x], 127, 255, cv2.THRESH_BINARY)
 
-    white = np.count_nonzero(binary == 255)
-    total = binary.size
-    black = total - white
-    white_percent = (white / total) * 100
+    white = np.sum(binary == 255)
+    black = np.sum(binary == 0)
 
-# Calculate the percentage of pixels in each image that are white and make a list that contains these percentages for each filename
     white_counts.append(white)
     black_counts.append(black)
-    white_percents.append(white_percent)
 end = time.time()
 
-print("Processing time only:", end - start)
+print(f"Processing time (no I/O): {end - start:.6f} seconds")
 # Print the number of white and black pixels in each image.
 
 print(colored("Counts of pixel by color in each image", "yellow"))
@@ -81,6 +64,13 @@ for x in range(len(filenames)):
     print(colored(f"White pixels in image {x}: {white_counts[x]}", "white"))
     print(colored(f"Black pixels in image {x}: {black_counts[x]}", "black"))
     print()
+
+# Calculate the percentage of pixels in each image that are white and make a list that contains these percentages for each filename
+
+for x in range(len(filenames)):
+    white_percent = (
+        100 * (white_counts[x] / (black_counts[x] + white_counts[x])))
+    white_percents.append(white_percent)
 
 # Print the filename (on one line in red font), and below that line print the percent white pixels and depth into the lung where the image was obtained
 
