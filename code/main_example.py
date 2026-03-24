@@ -58,7 +58,7 @@ for filename in filenames:
     images.append(img)
 
 # For each image (until the end of the list of images), calculate the number of black and white pixels and make a list that contains this information for each filename.
-
+start = time.time()
 for x in range(len(filenames)):
     _, binary = cv2.threshold(images[x], 127, 255, cv2.THRESH_BINARY)
 
@@ -73,7 +73,7 @@ for x in range(len(filenames)):
     white_percents.append(white_percent)
 end = time.time()
 
-print("Processing time only:", end - start)
+print(f"Processing time (no I/O): {end - start:.6f} seconds")
 # Print the number of white and black pixels in each image.
 
 print(colored("Counts of pixel by color in each image", "yellow"))

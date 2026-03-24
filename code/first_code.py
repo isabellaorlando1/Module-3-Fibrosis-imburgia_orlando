@@ -39,13 +39,13 @@ black_counts = []
 white_percents = []
 
 # Build the list of all the images you are analyzing
-
+start = time.time()
 for filename in filenames:
     img = cv2.imread(filename, 0)
     images.append(img)
 
 # For each image (until the end of the list of images), calculate the number of black and white pixels and make a list that contains this information for each filename.
-start = time.time()
+
 for x in range(len(filenames)):
     _, binary = cv2.threshold(images[x], 127, 255, cv2.THRESH_BINARY)
 
