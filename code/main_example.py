@@ -1,3 +1,4 @@
+#ChatGPT was used to improve accuracy and efficiency of this code.
 '''Module 3: count black and white pixels and compute the percentage of white pixels in a .jpg image and extrapolate points'''
 
 from termcolor import colored
@@ -6,6 +7,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.interpolate import interp1d
 import pandas as pd
+import time
+
+start = time.time()
 
 # Load the images you want to analyze
 
@@ -58,7 +62,7 @@ for filename in filenames:
     images.append(img)
 
 # For each image (until the end of the list of images), calculate the number of black and white pixels and make a list that contains this information for each filename.
-
+start = time.time()
 for x in range(len(filenames)):
     _, binary = cv2.threshold(images[x], 127, 255, cv2.THRESH_BINARY)
 
@@ -71,7 +75,9 @@ for x in range(len(filenames)):
     white_counts.append(white)
     black_counts.append(black)
     white_percents.append(white_percent)
+end = time.time()
 
+print(f"Processing time (no I/O): {end - start:.6f} seconds")
 # Print the number of white and black pixels in each image.
 
 print(colored("Counts of pixel by color in each image", "yellow"))
