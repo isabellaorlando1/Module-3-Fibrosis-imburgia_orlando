@@ -10,18 +10,20 @@ import pandas as pd
 # Load the images you want to analyze
 
 filenames = [
-    #r"C:\Users\ajq2af\OneDrive - University of Virginia\Documents\UVA\BME 2315\Module-3-Fibrosis\images\MASK_Sk658 Llobe ch010023.jpg",
-    #r"C:\Users\ajq2af\OneDrive - University of Virginia\Documents\UVA\BME 2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010159.jpg",
-    #r"C:\Users\ajq2af\OneDrive - University of Virginia\Documents\UVA\BME 2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010093.jpg",
-    #r"C:\Users\ajq2af\OneDrive - University of Virginia\Documents\UVA\BME 2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010118.jpg",
-    #r"C:\Users\ajq2af\OneDrive - University of Virginia\Documents\UVA\BME 2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010140.jpg",
-    #r"C:\Users\ajq2af\OneDrive - University of Virginia\Documents\UVA\BME 2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010157.jpg",
-    r"C:\Users\isabe\OneDrive\Documents\BME2315\Module-3-Fibrosis\images\MASK_Sk658 Llobe ch010023.jpg",
-    r"C:\Users\isabe\OneDrive\Documents\BME2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010159.jpg",
-    r"C:\Users\isabe\OneDrive\Documents\BME2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010093.jpg",
-    r"C:\Users\isabe\OneDrive\Documents\BME2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010118.jpg",
-    r"C:\Users\isabe\OneDrive\Documents\BME2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010140.jpg",
-    r"C:\Users\isabe\OneDrive\Documents\BME2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010157.jpg",
+    r"C:\Users\ajq2af\OneDrive - University of Virginia\Documents\UVA\BME 2315\Module-3-Fibrosis\images\MASK_Sk658 Llobe ch010023.jpg",
+    r"C:\Users\ajq2af\OneDrive - University of Virginia\Documents\UVA\BME 2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010159.jpg",
+    r"C:\Users\ajq2af\OneDrive - University of Virginia\Documents\UVA\BME 2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010093.jpg",
+    r"C:\Users\ajq2af\OneDrive - University of Virginia\Documents\UVA\BME 2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010118.jpg",
+    r"C:\Users\ajq2af\OneDrive - University of Virginia\Documents\UVA\BME 2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010140.jpg",
+    r"C:\Users\ajq2af\OneDrive - University of Virginia\Documents\UVA\BME 2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010157.jpg",
+    r"C:\Users\ajq2af\OneDrive - University of Virginia\Documents\UVA\BME 2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010134.jpg",
+    r"C:\Users\ajq2af\OneDrive - University of Virginia\Documents\UVA\BME 2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010146.jpg",
+    #r"C:\Users\isabe\OneDrive\Documents\BME2315\Module-3-Fibrosis\images\MASK_Sk658 Llobe ch010023.jpg",
+    #r"C:\Users\isabe\OneDrive\Documents\BME2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010159.jpg",
+    #r"C:\Users\isabe\OneDrive\Documents\BME2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010093.jpg",
+    #r"C:\Users\isabe\OneDrive\Documents\BME2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010118.jpg",
+    #r"C:\Users\isabe\OneDrive\Documents\BME2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010140.jpg",
+    #r"C:\Users\isabe\OneDrive\Documents\BME2315\Module-3-Fibrosis\images\MASK_SK658 Slobe ch010157.jpg",
 ]
 
 # Enter the depth of each image (in the same order that the images are listed above; you can find these in the .csv file provided to you which is tilted: "Filenames and Depths for Students")
@@ -32,7 +34,9 @@ depths = [
     9300,
     9900,
     8300,
-    750
+    750,
+    6600,
+    2000,
 ]
 
 # Make sure the lists match
@@ -102,50 +106,51 @@ print("The .csv file 'Percent_White_Pixels.csv' has been created.")
 '''the .csv writing subroutine ends here'''
 
 
+
 ##############
 # LECTURE 2: UNCOMMENT BELOW
 
 # # Interpolate a point: given a depth, find the corresponding white pixel percentage
 
-# interpolate_depth = float(input(colored(
-#     "Enter the depth at which you want to interpolate a point (in microns): ", "yellow")))
+interpolate_depth = float(input(colored(
+     "Enter the depth at which you want to interpolate a point (in microns): ", "yellow")))
 
-# x = depths
-# y = white_percents
+x = depths
+y = white_percents
 
 # # You can also use 'quadratic', 'cubic', etc.
-# i = interp1d(x, y, kind='linear')
-# interpolate_point = i(interpolate_depth)
-# print(colored(
-#     f'The interpolated point is at the x-coordinate {interpolate_depth} and y-coordinate {interpolate_point}.', "green"))
+i = interp1d(x, y, kind='quadratic')
+interpolate_point = i(interpolate_depth)
+print(colored(
+     f'The interpolated point is at the x-coordinate {interpolate_depth} and y-coordinate {interpolate_point}.', "green"))
 
-# depths_i = depths[:]
-# depths_i.append(interpolate_depth)
-# white_percents_i = white_percents[:]
-# white_percents_i.append(interpolate_point)
+depths_i = depths[:]
+depths_i.append(interpolate_depth)
+white_percents_i = white_percents[:]
+white_percents_i.append(interpolate_point)
 
 
 # # make two plots: one that doesn't contain the interpolated point, just the data calculated from your images, and one that also contains the interpolated point (shown in red)
-# fig, axs = plt.subplots(2, 1)
+fig, axs = plt.subplots(2, 1)
 
-# axs[0].scatter(depths, white_percents, marker='o', linestyle='-', color='blue')
-# axs[0].set_title('Plot of depth of image vs percentage white pixels')
-# axs[0].set_xlabel('depth of image (in microns)')
-# axs[0].set_ylabel('white pixels as a percentage of total pixels')
-# axs[0].grid(True)
+axs[0].scatter(depths, white_percents, marker='o', linestyle='-', color='blue')
+axs[0].set_title('Plot of depth of image vs percentage white pixels')
+axs[0].set_xlabel('depth of image (in microns)')
+axs[0].set_ylabel('white pixels as a percentage of total pixels')
+axs[0].grid(True)
 
 
-# axs[1].scatter(depths_i, white_percents_i, marker='o',
-#                linestyle='-', color='blue')
-# axs[1].set_title(
-#     'Plot of depth of image vs percentage white pixels with interpolated point (in red)')
-# axs[1].set_xlabel('depth of image (in microns)')
-# axs[1].set_ylabel('white pixels as a percentage of total pixels')
-# axs[1].grid(True)
-# axs[1].scatter(depths_i[len(depths_i)-1], white_percents_i[len(white_percents_i)-1],
-#                color='red', s=100, label='Highlighted point')
+axs[1].scatter(depths_i, white_percents_i, marker='o',
+                linestyle='-', color='blue')
+axs[1].set_title(
+     'Plot of depth of image vs percentage white pixels with interpolated point (in red)')
+axs[1].set_xlabel('depth of image (in microns)')
+axs[1].set_ylabel('white pixels as a percentage of total pixels')
+axs[1].grid(True)
+axs[1].scatter(depths_i[len(depths_i)-1], white_percents_i[len(white_percents_i)-1],
+                color='red', s=100, label='Highlighted point')
 
 
 # # Adjust layout to prevent overlap
-# plt.tight_layout()
-# plt.show()
+plt.tight_layout()
+plt.show()
